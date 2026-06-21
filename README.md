@@ -89,6 +89,83 @@ A curated list of innovative **Agent Skills**, **MCP servers**, and **Agent tool
 | [Vercel AI SDK](https://github.com/vercel/ai) | 25k | TypeScript | Tool calling, generative UI, streaming |
 | [Dify](https://github.com/langgenius/dify) | 60k+ | Python/TS | Visual agent builder, tool plugins, marketplace |
 
+## Game Development
+
+MCP servers and skills for working with game engines, 3D modeling, pixel art, and audio.
+
+### Game Engines
+
+#### Unity
+
+- [CoplayDev/unity-mcp](https://github.com/CoplayDev/unity-mcp) — ⭐ 11k Bridge between AI assistants and Unity Editor. Manage assets, control scenes, edit scripts.
+- [IvanMurzak/Unity-MCP](https://github.com/IvanMurzak/Unity-MCP) — ⭐ 3.2k AI Skills, MCP Tools & CLI for Unity. Any C# method → tool with one line.
+- [CoderGamester/mcp-unity](https://github.com/CoderGamester/mcp-unity) — ⭐ 1.8k MCP plugin connecting Unity Editor with Cursor, Claude Code, Codex, Windsurf.
+- [AnkleBreaker-Studio/unity-mcp-server](https://github.com/AnkleBreaker-Studio/unity-mcp-server) — ⭐ 284 268 tools: scene, GameObjects, Shader Graph, terrain, physics, NavMesh, animation, MPPM multiplayer.
+- [hatayama/unity-cli-loop](https://github.com/hatayama/unity-cli-loop) — ⭐ 406 CLI-driven AI loop for Unity: Editor → Play Mode automation.
+
+#### Godot
+
+- [Coding-Solo/godot-mcp](https://github.com/Coding-Solo/godot-mcp) — ⭐ 4.3k MCP for Godot engine. Launch editor, run projects, capture debug output.
+- [hi-godot/godot-ai](https://github.com/hi-godot/godot-ai) — ⭐ 657 Production-grade MCP + AI tools. Snap install, free.
+- [youichi-uda/godot-mcp-pro](https://github.com/youichi-uda/godot-mcp-pro) — ⭐ 448 162 tools: scene, animation, 3D, physics, particles, audio, shader, input sim, navigation, testing.
+- [tugcantopaloglu/godot-mcp](https://github.com/tugcantopaloglu/godot-mcp) — ⭐ 287 149 tools for full Godot 4.x engine control.
+- [yurineko73/Godot-MCP-Native](https://github.com/yurineko73/Godot-MCP-Native) — ⭐ 322 Native Godot MCP via HTTP — no dependency installation needed.
+
+#### Unreal Engine
+
+- [chongdashu/unreal-mcp](https://github.com/chongdashu/unreal-mcp) — ⭐ 2k Control Unreal Engine via natural language through MCP.
+- [flopperam/unreal-engine-mcp](https://github.com/flopperam/unreal-engine-mcp) — ⭐ 1k Create entire towns, castles, mansions, mazes with AI in UE 5.5+.
+- [Natfii/UnrealClaude](https://github.com/Natfii/UnrealClaude) — ⭐ 799 Claude Code CLI integration for UE 5.7 with built-in UE documentation context.
+- [tumourlove/monolith](https://github.com/tumourlove/monolith) — ⭐ ~500 1,400+ actions across Blueprints, Materials, Niagara, Animation, Mesh, AI, GAS, UI, Audio.
+- [ChiR24/Unreal_mcp](https://github.com/ChiR24/Unreal_mcp) — ⭐ 736 Native C++ Automation Bridge plugin for comprehensive MCP.
+
+#### Roblox Studio
+
+- [Roblox/studio-rust-mcp-server](https://github.com/Roblox/studio-rust-mcp-server) — ⭐ 471 Official Roblox MCP Server (standalone). By Roblox Inc.
+- [boshyxd/robloxstudio-mcp](https://github.com/boshyxd/robloxstudio-mcp) — ⭐ 471 Create agentic AI workflows in ROBLOX Studio.
+- **[@weppy/roblox-mcp](https://www.npmjs.com/package/@weppy/roblox-mcp)** — Real-time Roblox Studio integration for AI coding agents.
+
+#### Minecraft
+
+- [yuniko-software/minecraft-mcp-server](https://github.com/yuniko-software/minecraft-mcp-server) — ⭐ 627 Control Minecraft character in real-time — build, explore, interact via natural language.
+
+### 3D Modeling & Blender
+
+- [ahujasid/blender-mcp](https://github.com/ahujasid/blender-mcp) — ⭐ 23k **The #1 game-dev-adjacent MCP.** Open-source Blender control with any LLM.
+- [3DSceneAgent/Vibe3DScene](https://github.com/3DSceneAgent/Vibe3DScene) — ⭐ 87 Create 3D scenes from words via Blender MCP + LangGraph.
+
+### Pixel Art & Sprite
+
+- [willibrandon/pixel-plugin](https://github.com/willibrandon/pixel-plugin) — ⭐ 226 Claude Code plugin for Aseprite pixel art — animation, retro palettes, dithering.
+- [willibrandon/pixel-mcp](https://github.com/willibrandon/pixel-mcp) — ⭐ 89 MCP server for Aseprite pixel art creation via AI.
+- [youichi-uda/aseprite-mcp-pro](https://github.com/youichi-uda/aseprite-mcp-pro) — ⭐ 18 121 tools for sprites, drawing, animation, palettes, export, + Godot integration.
+- **PixelLab** (Smithery) — Generate animated pixel art characters, tilesets, and objects.
+- **Spritesheet Forge** (Smithery) — PNG→spritesheet, GIF→frames, split spritesheets, trim PNG.
+
+### Audio & Music
+
+- [pasie15/mcp-server-musicgpt](https://github.com/pasie15/mcp-server-musicgpt) — MCP for MusicGPT AI audio API — music generation, voice conversion, 24 tools.
+- [frankxai/suno-mcp-server](https://github.com/frankxai/suno-mcp-server) — MCP for Suno AI music generation.
+- [wynandw87/claude-code-elevenlabs-mcp](https://github.com/wynandw87/claude-code-elevenlabs-mcp) — ElevenLabs TTS, sound effects, music, voice cloning for Claude Code.
+
+### Procedural Generation & World Building
+
+- [MushroomFleet/zero-vector-MCP](https://github.com/MushroomFleet/zero-vector-MCP) — Deterministic procedural generation — seed-based world building, terrain & content systems.
+- [DangerBlack/fantasy-world-mcp](https://github.com/DangerBlack/fantasy-world-mcp) — Procedural fantasy world generation and evolution simulation.
+- [shawn0326/texture-mcp](https://github.com/shawn0326/texture-mcp) — Procedural texture generation via semantic presets.
+
+### Game Modding & Emulation
+
+- [Gennadiyev/STS2MCP](https://github.com/Gennadiyev/STS2MCP) — ⭐ 416 Full agentic runs for Slay the Spire 2. Exposes in-game state via MCP.
+- [drhelius/Gearboy](https://github.com/drhelius/Gearboy) — ⭐ 1.2k Game Boy / GBC emulator with embedded MCP server for AI debugging.
+- [drhelius/Gearsystem](https://github.com/drhelius/Gearsystem) — ⭐ 374 Sega Master System / Game Gear emulator with embedded MCP server.
+- **ROMulus** (Smithery, 19.7k uses) — Retro gaming ROM search engine for 28 consoles.
+- **HytaleModder** (Smithery) — Access Hytale API docs for modding via MCP.
+
+### Multi-Engine Tools
+
+- [tykisgod/quick-question](https://github.com/tykisgod/quick-question) — ⭐ 10 Control plane for game-dev agents. Compile/test/review loop across Unity, Godot, Unreal, S&box. 26 slash commands.
+
 ## Contribute
 
 PRs welcome! Submit additions via pull request.
