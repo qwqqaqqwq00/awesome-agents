@@ -166,6 +166,108 @@ MCP servers and skills for working with game engines, 3D modeling, pixel art, an
 
 - [tykisgod/quick-question](https://github.com/tykisgod/quick-question) — ⭐ 10 Control plane for game-dev agents. Compile/test/review loop across Unity, Godot, Unreal, S&box. 26 slash commands.
 
+## Harness Best Practices
+
+Best practices for authoring cross-platform agent skills and managing agent harnesses.
+
+### What Is a Harness?
+
+A **harness** is the runtime that hosts agent skills — e.g. Claude Code, OpenCode, Cursor, Gemini CLI. It differs from a *framework* (build-time toolkit like LangChain) or an *agent* (a single LLM instance with prompt + tools).
+
+| Concept | Role | Example |
+|---|---|---|
+| **Harness** | Runtime that hosts + orchestrates agents | Claude Code CLI, OpenCode, Cursor |
+| **Framework** | Library for constructing agents | LangChain, CrewAI, Mastra |
+| **Agent** | Single LLM instance with prompt + tools | Build, Plan, a subagent |
+| **Skill** | Portable instruction package (`SKILL.md`) | code-review, restriction-ensure |
+| **MCP Server** | External tool via Model Context Protocol | Filesystem, GitHub, Playwright |
+
+### Skill Standard
+
+The **[Agent Skills Standard](https://agentskills.io)** ([agentskills/agentskills](https://github.com/agentskills/agentskills) — ⭐ 21k) is the universal format, adopted by 25+ products:
+
+```
+my-skill/
+├── SKILL.md          # YAML frontmatter + Markdown body
+├── scripts/          # Executable code (optional)
+├── references/       # Deep docs loaded on demand
+└── assets/           # Templates, resources
+```
+
+**Required frontmatter:** `name` (1-64 chars, lowercase-hyphenated), `description` (1-1024 chars, front-load trigger keywords).
+
+### Cross-Harness Compatibility
+
+#### The `.agents/skills/` Interop Path
+
+All major harnesses recognize `.agents/skills/` as a universal alias, alongside their native paths:
+
+| Harness | Native Path | Interop Path |
+|---|---|---|
+| Claude Code | `.claude/skills/` | `.agents/skills/` |
+| OpenCode | `.opencode/skills/` | `.agents/skills/` |
+| Cursor | `.cursor/skills/` | `.agents/skills/` |
+| Gemini CLI | `.gemini/skills/` | `.agents/skills/` |
+| Copilot | `.github/skills/` | `.agents/skills/` |
+
+#### DOs and DON'Ts
+
+| DON'T (tool-specific) | DO (action-oriented) |
+|---|---|
+| "Use the `Read` tool to open the file" | "Open the file" |
+| "Use `Bash` to run `npm test`" | "Run `npm test`" |
+| "Call `Grep` with pattern X" | "Search for pattern X" |
+| "Spawn a subagent via `Task`" | "Delegate to a subagent" |
+
+**Why:** Codex has no `Read`/`Edit`/`Bash` vocabulary — the model picks tools from the action described. OpenCode uses lowercase names. Cursor has its own vocabulary. **Describe the action, not the tool.**
+
+#### Skill Body Size
+
+- Keep under **8 KB** for Codex CLI compatibility
+- Move detailed reference material to `references/` subfolder
+- Keep `SKILL.md` under **500 lines**
+
+### Major Harness Comparison
+
+| Harness | Source | Skill Discovery | Permissions | Context File | Subagents |
+|---|---|---|---|---|---|
+| **[Claude Code](https://code.claude.com)** | Proprietary | `.claude/skills/`, marketplace | `allowed-tools` per skill | `CLAUDE.md` | `Task` tool |
+| **[OpenCode](https://opencode.ai)** | Open (160k⭐) | `.opencode/skills/`, `.agents/skills/`, `.claude/skills/` | Per-command globs (`allow/ask/deny`) | `AGENTS.md` | `task` tool |
+| **[Cursor](https://cursor.com)** | Proprietary | `.cursor/skills/`, marketplace | Toggle (read-only) | `AGENTS.md`, `.cursorrules` | Via delegation |
+| **[Gemini CLI](https://geminicli.com)** | Open | `.gemini/skills/`, extensions | Trusted folders, sandboxing | `GEMINI.md` | `@agent` syntax |
+| **[Codex CLI](https://codex.cli)** | Open | `.codex/skills/` | Sandbox only | `AGENTS.md` (32KB cap) | Prose |
+| **[GitHub Copilot](https://github.com/features/copilot)** | Proprietary | `.github/skills/`, `gh skill` | Via VS Code | `.github/copilot-instructions.md` | Cloud agent |
+| **[Kiro](https://kiro.dev)** | Proprietary | `.kiro/skills/` | — | — | — |
+
+### Notable Cross-Harness Collections
+
+- [addyosmani/agent-skills](https://github.com/addyosmani/agent-skills) — ⭐ 65k Production-grade engineering skills. 24 skills across Define→Plan→Build→Verify→Review→Ship lifecycle. Each harness gets native artifacts — not lowest-common-denominator translations.
+- [wshobson/agents](https://github.com/wshobson/agents) — ⭐ 37k Multi-harness plugin marketplace. 84 plugins shipping to 6 harnesses via adapter-driven architecture (single Markdown source → per-harness artifacts).
+
+### Skill Authoring Practices
+
+From addyosmani/agent-skills: **anti-rationalization table** — common excuses agents use to skip steps, with documented counter-arguments. Verification is non-negotiable ("seems right" is never sufficient). `SKILL.md` is an entry point; references load on demand.
+
+From wshobson/agents: **plugin-eval framework** with three tiers — static analysis (<2s), LLM Judge across 4 dimensions (~30s), Monte Carlo simulation of 50-100 runs (~2-5min). Portability linters catch tool-specific references, size cap violations, and name collisions.
+
+### Skill vs Plugin vs MCP vs Command
+
+| Mechanism | Best For | Portable |
+|---|---|---|
+| **Skill** | Knowledge + instructions + optional scripts | Yes (Agent Skills standard) |
+| **Plugin** | Bundled skills + agents + hooks + MCP | Varies (harness-specific) |
+| **MCP Server** | External tool integration (APIs, databases) | Yes (open protocol) |
+| **Command** | One-shot slash action | Detached from skill standard |
+
+### Emerging Trends
+
+- **`.agents/skills/`** as the universal interop path across all major harnesses
+- **Adapter-based multi-harness shipping** (single source → per-harness artifacts) as production pattern
+- **MCP** as the cross-harness standard for external tool integration
+- **Progressive disclosure** loading: metadata → instructions → resources
+- **OpenCode's permission model** leading in granularity (per-command glob patterns)
+- **Skill evaluation** moving from static linters to LLM Judge to Monte Carlo simulation
+
 ## Contribute
 
 PRs welcome! Submit additions via pull request.
