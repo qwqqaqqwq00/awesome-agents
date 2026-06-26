@@ -52,8 +52,9 @@ A curated list of innovative **Agent Skills**, **MCP servers**, and **Agent tool
 - [Pythagora-io/gpt-pilot](https://github.com/Pythagora-io/gpt-pilot) — ⭐ 32k AI developer companion that plans, codes, debugs, and tests — a complete agent loop for software projects.
 - [OpenAI Agents SDK](https://github.com/openai/openai-agents-python) — ⭐ 27k Lightweight agent loop with tool calling, handoffs, guardrails, and tracing.
 
-### Specialized Skills
+### Loop Engineering
 
+- **loop-engineering** — Full lifecycle skill: Spec → Build → Test → Review → Security → Deploy → Monitor. Orchestrator + 6 subagents (`le-planner`, `le-builder`, `le-tester`, `le-reviewer`, `le-security`, `le-deployer`) with HARD-GATEs between phases. `/le` command included. Install: drop `.opencode/skills/loop-engineering/` into your project. See [our project](https://github.com/qwqqaqqwq00/awesome-agents) — the skill source is in this repo.
 - **restriction-ensure** — Consensus agent loop (Orchestrator ↔ Designer ↔ Executor) with constraint-based verification. See [qwqqaqqwq00/RestrictionEnsure](https://github.com/qwqqaqqwq00/RestrictionEnsure).
 - **code-reviewer** (from addyosmani/agent-skills) — Automated PR review with security, performance, and style checks.
 - **webperf-auditor** (from addyosmani/agent-skills) — Lighthouse-based web performance auditing skill.
