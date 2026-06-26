@@ -268,6 +268,176 @@ From wshobson/agents: **plugin-eval framework** with three tiers — static anal
 - **OpenCode's permission model** leading in granularity (per-command glob patterns)
 - **Skill evaluation** moving from static linters to LLM Judge to Monte Carlo simulation
 
+## Loop Engineering
+
+AI agents for continuous, reliable software development — covering coding, refactoring, security, and CI/CD delivery.
+
+### Concept
+
+**Loop engineering** is the practice of using multi-agent AI systems to automate the full software engineering lifecycle: spec → design → code → test → review → security → deploy → monitor → iterate. Each phase is a "loop" with gates, verification, and feedback.
+
+Derived from Anthropic's [Building Effective Agents](https://www.anthropic.com/research/building-effective-agents) taxonomy — the evaluator-optimizer pattern is the core "inner loop" of all engineering loops.
+
+### Autonomous Coding Agents
+
+- [OpenHands](https://github.com/OpenHands/OpenHands) — ⭐ 78k AI software development platform with sandboxed agent execution (formerly OpenDevin). Core engine for a full development loop.
+- [SWE-agent](https://github.com/SWE-agent/SWE-agent) — ⭐ 20k Takes GitHub issues and produces patches using a custom Agent-Computer Interface. The canonical issue→patch→test→refine loop.
+- [Aider](https://github.com/Aider-AI/aider) — ⭐ 47k Terminal-based AI pair programming with best-in-class repo-level editing. Map-of-repo context for accurate multi-file changes.
+- [Cosine](https://github.com/cosine-io/cosine) — ⭐ 4k Uses "Code Genome" representation to map cross-file relationships before making changes.
+- [Codegen](https://github.com/codegen-sh/codegen) — ⭐ 520 Python SDK for running code agents at scale. Framework for building custom agent loops.
+- [AutoCodeRover/SpecRover](https://github.com/nuprl/AutoCodeRover) — ⭐ 2k Automated program repair with spec-first + retrieval-augmented code search.
+- [Devin](https://www.cognition.ai) — Proprietary. First fully autonomous AI software engineer. Archetype for spec→build→debug→ship loop.
+- [Factory Runner](https://www.factory.ai) — Proprietary. Server-side autonomous coding agent in sandboxed env. Opens PRs and resolves issues autonomously.
+
+### Orchestration Frameworks
+
+| Framework | Stars | Language | Loop Pattern |
+|---|---|---|---|
+| **[LangGraph](https://langchain-ai.github.io/langgraph)** | — | Python | Graph state machine with cyclic nodes for each engineering phase |
+| **[CrewAI](https://github.com/crewAIInc/crewAI)** | 54k | Python | Role-based agents (Architect, Developer, Reviewer) with sequential/hierarchical processes |
+| **[AutoGen](https://github.com/microsoft/autogen)** | 40k | Python | Multi-agent conversation; Assistant↔Critic for consensus loops |
+| **[Mastra](https://mastra.ai)** | 25k | TypeScript | Graph workflows with .then/.branch/.parallel plus built-in evals |
+| **[OpenAI Agents SDK](https://github.com/openai/openai-agents-python)** | 27k | Python | Lightweight tool-calling loop with handoffs and guardrails |
+| **[RestrictionEnsure](https://github.com/qwqqaqqwq00/RestrictionEnsure)** | — | Skill | Consensus loop: Designer ↔ Executor negotiation before execution |
+
+### Loop Patterns
+
+#### spec → build → verify → ship (Feature Development)
+```
+[Spec] → [Build] → [Verify] → [Ship]
+   ↑                        |
+   └─────── [Revise] ←──────┘
+```
+Agents: Spec Writer → Code Generator → Tester + Reviewer → Deployer.
+
+#### red → green → refactor (TDD Loop)
+```
+[Write Failing Test] → [Write Minimum Code] → [All Tests Pass] → [Refactor]
+                              ↑                                         |
+                              └─────────────────── [Re-run Tests] ←─────┘
+```
+Agents: Test Generator → Code Generator → Test Runner → Refactoring.
+
+#### audit → fix → test (Security Loop)
+```
+[SAST Scan] → [Vulnerability Assessment] → [Fix Generation] → [Re-scan]
+    ↑                                                             |
+    └───────────────────── [If still vulnerable] ←────────────────┘
+```
+Agents: Semgrep/Snyk → Risk Assessor → Fix Agent (Corgea) → Re-scanner.
+
+#### monitor → diagnose → remediate (Self-Healing)
+```
+[Metrics/Logs] → [Anomaly Detection] → [Root Cause Analysis] → [Remediation]
+     ↑                                                                  |
+     └─────────────────── [Verify Fix / Rollback if needed] ←──────────┘
+```
+Agents: Observability → Diagnostician → Fix Executor → Verifier.
+
+#### review → approve → merge → deploy (CI/CD)
+```
+[PR Submitted] → [AI Review] → [Human Sign-off] → [Merge] → [CI/CD] → [Deploy]
+                    |                |              |          |
+                    ↓                ↓              ↓          ↓
+            [Request Changes]   [Abort]      [Rollback]   [Rollback]
+```
+Agents: CodeRabbit/Codeball → Human → CI Runner → CD Deployer.
+
+### Specialized Phase Agents
+
+#### Code Generation
+- [Aider](https://github.com/Aider-AI/aider) — ⭐ 47k Terminal AI pair programming, best repo-aware editing
+- [Claude Code](https://claude.ai/code) — Proprietary. Anthropic's agentic coding tool
+- [Codex CLI](https://github.com/microsoft/Codex-CLI) — ⭐ 2.4k OpenAI's CLI for natural language → code
+- [Cursor](https://cursor.com) — Proprietary. AI-first IDE with agent mode
+
+#### Test Generation
+- [CodiumAI / Qodo](https://www.qodo.ai) — Proprietary. AI test generation from code structure
+- [Diffblue](https://www.diffblue.com) — Proprietary. Automated Java unit tests via RL
+- [CoverAgent](https://github.com/coveragent-ai) — ⭐ 500 AI agent that writes tests for coverage
+
+#### Code Review
+- [CodeRabbit](https://coderabbit.ai) — Proprietary. AI review bot with per-line feedback, auto-approve
+- [Codeball](https://codeball.ai) — Proprietary. Risk-scoring AI review for bug-prone code
+- [Sourcery](https://github.com/sourcery-ai/sourcery) — ⭐ 2k AI reviews + automated refactoring
+- [Aikido](https://www.aikido.dev) — Proprietary. Security-focused code review with SAST+SCA
+
+#### Security / SAST
+- [Semgrep](https://github.com/semgrep/semgrep) — ⭐ 16k Lightweight static analysis, 30+ languages
+- [Snyk](https://github.com/snyk/cli) — ⭐ 6k Dependency + code vulnerability scanning
+- [GitGuardian](https://github.com/GitGuardian/ggshield) — ⭐ 2k Hardcoded secrets detection (pre-commit + CI)
+- [Bearer](https://github.com/Bearer/bearer) — ⭐ 2k Static analysis for security & privacy (OWASP Top 10)
+- [Corgea AI](https://corgea.com) — Proprietary. AI-powered vulnerability remediation + fix PR
+
+#### Refactoring
+- [Sourcery](https://github.com/sourcery-ai/sourcery) — ⭐ 2k AI refactoring, 120+ patterns
+- [Moderne](https://www.moderne.io) — Proprietary. Enterprise-scale refactoring via OpenRewrite
+- [Codemod](https://github.com/codemod-com) — ⭐ 2k Framework for building codemods
+- [jscodeshift](https://github.com/facebook/jscodeshift) — ⭐ 10k Facebook's JS/TS AST transformation toolkit
+
+#### Dependency Updates
+- [Dependabot](https://github.com/dependabot/dependabot-core) — ⭐ 6k Automated dependency PRs, built into GitHub
+- [Renovate](https://github.com/renovatebot/renovate) — ⭐ 22k Cross-platform dependency automation, highly configurable
+
+#### CI/CD + Deployment
+- [GitHub Actions](https://github.com/features/actions) — AI-assisted workflow authoring + execution
+- [Atlassian Rovo](https://www.atlassian.com/software/rovo) — AI agent for Jira/Bitbucket, automates dev workflows
+- [GitLab Duo](https://about.gitlab.com/gitlab-duo) — Full GitLab CI/CD AI: code suggestions, review, root cause analysis
+
+### Reliability Patterns
+
+| Pattern | Description | Tools |
+|---|---|---|
+| **Consensus loop** | Designer↔Executor negotiation before writing any code | RestrictionEnsure, SpecRover |
+| **Human checkpoints** | Pause at plan/PR/deploy gates for human review | All frameworks |
+| **Sandbox execution** | Agents run in isolated, ephemeral environments | OpenHands, Docker |
+| **Staged rollout** | 1% → 10% → 50% → 100% with AI verification per stage | LaunchDarkly, flag-based |
+| **LLM Judge + Monte Carlo** | Run N samples, score with LLM, pick best | wshobson/agent-eval |
+| **Blast radius minimization** | File isolation, atomic commits, feature flags | Git practices |
+| **Guardrails** | Allow/deny lists for files, commands, APIs | OpenCode permissions |
+
+### Architecture Blueprint
+
+```
+┌──────────────────────────────────────────────────────────┐
+│                   ORCHESTRATOR AGENT                       │
+│  (LangGraph / Mastra workflow — routes to specialized agents)│
+└────┬─────┬──────┬──────┬──────┬──────┬──────┬────────────┘
+     │     │      │      │      │      │      │
+     ▼     ▼      ▼      ▼      ▼      ▼      ▼
+   Spec  Code   Test  Review  Sec   Deploy  Monitor
+   Agent Gen    Gen   Agent  Agent  Agent   Agent
+     │     │      │      │      │      │      │
+     └─────┴──────┴──────┴──────┴──────┴──────┘
+                         │
+                  VERIFICATION GATE
+                  (tests + review + security + LLM Judge)
+                         │
+                  DEPLOY / RELEASE
+                  (staged rollout)
+                         │
+                  MONITOR & OBSERVE
+                  (self-healing loop)
+```
+
+### Maturity Model
+
+| Level | Name | Characteristics |
+|---|---|---|
+| **L0** | Manual | No AI agents, pure human development |
+| **L1** | Assisted | AI code completion (Copilot), basic linters in CI |
+| **L2** | Semi-automated | AI PR review bots, automated deps, SAST in CI |
+| **L3** | Automated loops | Autonomous code gen, automated test+review gates, staged rollouts |
+| **L4** | Self-healing | Agents detect issues, generate fixes, deploy patches, auto-rollback |
+| **L5** | Autonomous engineering | Multi-agent orchestrator plans, codes, tests, reviews, deploys, monitors |
+
+### Key Resources
+
+- [Anthropic: Building Effective Agents](https://www.anthropic.com/research/building-effective-agents) — Foundational taxonomy for agent patterns
+- [SWE-bench/SWE-bench Verified](https://github.com/SWE-bench/SWE-bench) — ⭐ 5k Standard benchmark for evaluating coding agents
+- [RestrictionEnsure](https://github.com/qwqqaqqwq00/RestrictionEnsure) — Consensus agent loop for constraint-verified engineering
+- [Full Research Report](loop-engineering-report.md) — 574-line comprehensive analysis in this repo
+
 ## Contribute
 
 PRs welcome! Submit additions via pull request.
