@@ -1,0 +1,56 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "agent": {
+    "le-planner": {
+      "description": "Spec and planning agent for Loop Engineering. Analyzes tasks, reads constraints, produces structured plans.",
+      "mode": "subagent",
+      "file": ".opencode/agents/le-planner.md"
+    },
+    "le-builder": {
+      "description": "Code implementation agent for Loop Engineering. Implements approved plans faithfully.",
+      "mode": "subagent",
+      "file": ".opencode/agents/le-builder.md"
+    },
+    "le-reviewer": {
+      "description": "Code review agent for Loop Engineering. Reviews quality, edge cases, conventions.",
+      "mode": "subagent",
+      "file": ".opencode/agents/le-reviewer.md"
+    },
+    "le-tester": {
+      "description": "Test generation and execution agent for Loop Engineering. Writes and runs tests following RED-GREEN-REFACTOR.",
+      "mode": "subagent",
+      "file": ".opencode/agents/le-tester.md"
+    },
+    "le-security": {
+      "description": "Security audit agent for Loop Engineering. SAST, dependency checks, secrets detection.",
+      "mode": "subagent",
+      "file": ".opencode/agents/le-security.md"
+    },
+    "le-deployer": {
+      "description": "Deploy agent for Loop Engineering. Build, stage, deploy with canary, verify, rollback.",
+      "mode": "subagent",
+      "file": ".opencode/agents/le-deployer.md"
+    },
+    "build": {
+      "permission": {
+        "task": {
+          "le-planner": "allow",
+          "le-builder": "allow",
+          "le-reviewer": "allow",
+          "le-tester": "allow",
+          "le-security": "allow",
+          "le-deployer": "allow"
+        }
+      }
+    }
+  },
+  "skills": {
+    "paths": [".opencode/skills"]
+  },
+  "command": {
+    "le": {
+      "description": "Run Loop Engineering on a task. Loads the loop-engineering skill and initiates spec→build→verify→ship lifecycle.",
+      "file": ".opencode/commands/le.md"
+    }
+  }
+}

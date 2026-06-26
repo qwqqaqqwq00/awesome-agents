@@ -1,0 +1,26 @@
+{
+  "name": "@awesome-agents/loop-engineering",
+  "version": "0.1.0",
+  "description": "OpenCode skill — full lifecycle Loop Engineering pipeline. Spec → Build → Test → Review → Security → Deploy → Monitor with HARD-GATEs, Iron Laws, and 6 specialized subagents.",
+  "type": "module",
+  "scripts": {
+    "test": "opencode --eval \"skill loop-engineering\" --eval \"/le run test:workflow\"",
+    "verify": "opencode --eval \"skill loop-engineering\" --eval \"/le run verify:package\"",
+    "ship": "opencode --eval \"skill loop-engineering\" --eval \"/le run verify:package\" && npm publish"
+  },
+  "keywords": [
+    "opencode",
+    "skill",
+    "agent",
+    "loop-engineering",
+    "pipeline",
+    "cicd",
+    "agent-loop"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/qwqqaqqwq00/awesome-agents",
+    "directory": "packages/loop-engineering"
+  }
+}

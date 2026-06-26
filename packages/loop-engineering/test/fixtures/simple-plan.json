@@ -1,0 +1,21 @@
+{
+  "artifactKind": "plan",
+  "status": "ready",
+  "data": {
+    "objective": "Create a greet.js module with hello() function",
+    "approach": "Single-file module exporting a hello() function",
+    "constraints_checked": ["follow project conventions"],
+    "files": {
+      "create": ["src/greet.js", "test/greet.test.js"],
+      "modify": [],
+      "delete": []
+    },
+    "dependencies": [],
+    "risks": [],
+    "acceptance_criteria": [
+      "greet.js exports hello()",
+      "hello() returns 'Hello, World!'",
+      "tests pass"
+    ]
+  }
+}

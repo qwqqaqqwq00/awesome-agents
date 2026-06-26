@@ -54,7 +54,7 @@ A curated list of innovative **Agent Skills**, **MCP servers**, and **Agent tool
 
 ### Loop Engineering
 
-- **loop-engineering** — Full lifecycle skill: Spec → Build → Test → Review → Security → Deploy → Monitor. Orchestrator + 6 subagents (`le-planner`, `le-builder`, `le-tester`, `le-reviewer`, `le-security`, `le-deployer`) with HARD-GATEs between phases. `/le` command included. Install: drop `.opencode/skills/loop-engineering/` into your project. See [our project](https://github.com/qwqqaqqwq00/awesome-agents) — the skill source is in this repo.
+- **loop-engineering** — Full lifecycle skill: Spec → Build → Test → Review → Security → Deploy → Monitor. Orchestrator + 6 subagents (`le-planner`, `le-builder`, `le-tester`, `le-reviewer`, `le-security`, `le-deployer`) with HARD-GATEs, Iron Laws, DOT flow diagrams, and anti-rationalization tables between phases. `/le` command included. Self-verification workflow (`test/workflow.md`) for pre-ship checks. See [`packages/loop-engineering/`](packages/loop-engineering/) for installable package.
 - **restriction-ensure** — Consensus agent loop (Orchestrator ↔ Designer ↔ Executor) with constraint-based verification. See [qwqqaqqwq00/RestrictionEnsure](https://github.com/qwqqaqqwq00/RestrictionEnsure).
 - **code-reviewer** (from addyosmani/agent-skills) — Automated PR review with security, performance, and style checks.
 - **webperf-auditor** (from addyosmani/agent-skills) — Lighthouse-based web performance auditing skill.
