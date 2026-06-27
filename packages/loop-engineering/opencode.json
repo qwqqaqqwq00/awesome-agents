@@ -46,19 +46,5 @@
   },
   "skills": {
     "paths": [".opencode/skills"]
-  },
-  "command": {
-    "le": {
-      "description": "Run Loop Engineering on a task. Loads the loop-engineering skill and initiates spec→build→verify→ship lifecycle.",
-      "file": ".opencode/commands/le.md"
-    },
-    "le-verify": {
-      "description": "Verify the loop-engineering package. Loads le-verify skill and runs 6-step self-check: structure → frontmatter → contracts → subagents → integration → delivery.",
-      "file": ".opencode/commands/le-verify.md"
-    },
-    "le-run": {
-      "description": "Run a Loop Engineering workflow step directly. Usage: /le-run verify:package",
-      "file": ".opencode/commands/le-run.md"
-    }
   }
 }
