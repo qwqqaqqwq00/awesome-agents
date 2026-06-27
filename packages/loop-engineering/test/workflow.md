@@ -207,7 +207,7 @@ Before marking the package as ready to publish:
 - [ ] `opencode.json` is valid JSON (no syntax errors)
 - [ ] `AGENTS.md` exists as workspace template
 - [ ] All files have consistent frontmatter style
-- [ ] No placeholder content ("TODO", "FIXME", "TBD")
+- [ ] No placeholder markers (the words TODO / FIXME / TBD as standalone tokens, not as references)
 - [ ] License is declared
 - [ ] Repository URL in `package.json` points to correct path
 

@@ -213,7 +213,7 @@ All steps produce evidence → PASS. Any missing → FAIL.
 - [ ] All 6 subagents have contract declarations
 - [ ] `opencode.json` is valid JSON
 - [ ] `AGENTS.md` exists as template
-- [ ] No "TODO", "FIXME", "TBD" in any file
+- [ ] No placeholder markers (the words TODO / FIXME / TBD as standalone tokens, not as references) in any file
 - [ ] License declared in package.json
 - [ ] Repository URL points to correct path
 - [ ] `package.json` `scripts.test` command works
